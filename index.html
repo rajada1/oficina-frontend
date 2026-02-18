@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oficina Digital — Sistema de Gestão</title>
+    <meta name="description" content="Sistema completo de gestão para oficina mecânica - Microserviços">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">⚙️</span>
+                <span class="logo-text">Oficina<br><small>Digital</small></span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Cadastros</div>
+            <button class="nav-item" data-panel="pessoas">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Pessoas</span>
+                <span class="nav-badge">PPL</span>
+            </button>
+            <button class="nav-item" data-panel="clientes">
+                <span class="nav-icon">👤</span>
+                <span class="nav-label">Clientes & Veículos</span>
+                <span class="nav-badge">CLI</span>
+            </button>
+            <button class="nav-item" data-panel="catalogo">
+                <span class="nav-icon">🔩</span>
+                <span class="nav-label">Catálogo</span>
+                <span class="nav-badge">CAT</span>
+            </button>
+
+            <div class="nav-divider"></div>
+            <div class="nav-section-label">Operações</div>
+            <button class="nav-item active" data-panel="os">
+                <span class="nav-icon">📋</span>
+                <span class="nav-label">Ordens de Serviço</span>
+                <span class="nav-badge">OS</span>
+            </button>
+            <button class="nav-item" data-panel="billing">
+                <span class="nav-icon">💰</span>
+                <span class="nav-label">Faturamento</span>
+                <span class="nav-badge">BIL</span>
+            </button>
+            <button class="nav-item" data-panel="execution">
+                <span class="nav-icon">🔧</span>
+                <span class="nav-label">Execução</span>
+                <span class="nav-badge">EXE</span>
+            </button>
+
+            <div class="nav-divider"></div>
+            <div class="nav-section-label">Testes</div>
+            <button class="nav-item" data-panel="saga">
+                <span class="nav-icon">🔄</span>
+                <span class="nav-label">Saga Flow</span>
+            </button>
+
+            <div class="nav-divider"></div>
+            <div class="nav-section-label">Sistema</div>
+            <button class="nav-item" data-panel="auth">
+                <span class="nav-icon">🔐</span>
+                <span class="nav-label">Autenticação</span>
+            </button>
+            <button class="nav-item" data-panel="settings">
+                <span class="nav-icon">⚡</span>
+                <span class="nav-label">API Config</span>
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <div id="auth-indicator" class="auth-indicator" onclick="App.navigateTo('auth')" title="Clique para autenticar">🔴 Não autenticado</div>
+            <button class="toggle-console" id="toggleConsole" title="Toggle HTTP Console">
+                <span>📡</span>
+                <span>HTTP Console</span>
+                <span class="console-count" id="consoleCount">0</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <main class="main-content">
+        <div id="contentArea">
+            <!-- O conteúdo é renderizado dinamicamente pelo JS -->
+        </div>
+    </main>
+
+    <!-- ═══════════════ HTTP CONSOLE ═══════════════ -->
+    <div class="http-console" id="httpConsole">
+        <div class="console-header">
+            <h3>📡 HTTP Console</h3>
+            <div class="console-controls">
+                <button class="btn-icon" id="consoleClearBtn" title="Limpar">🗑</button>
+                <button class="btn-icon" onclick="API.toggleConsole()" title="Expandir/Recolher">▲</button>
+            </div>
+        </div>
+        <div class="console-body" id="consoleBody">
+            <div class="console-entries" id="consoleEntries">
+                <p class="placeholder">As requisições HTTP aparecerão aqui.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ TOAST CONTAINER ═══════════════ -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- ═══════════════ SCRIPTS ═══════════════ -->
+    <!-- Módulo base (API Client) deve vir primeiro -->
+    <script src="js/api.js"></script>
+    <!-- Autenticação (deve vir logo após API) -->
+    <script src="js/auth.js"></script>
+    <!-- Módulos de funcionalidade -->
+    <script src="js/pessoas.js"></script>
+    <script src="js/clientes.js"></script>
+    <script src="js/catalogo.js"></script>
+    <script src="js/os.js"></script>
+    <script src="js/billing.js"></script>
+    <script src="js/execucao.js"></script>
+    <script src="js/saga.js"></script>
+    <!-- App principal (orquestrador) - deve vir por último -->
+    <script src="js/settings.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
